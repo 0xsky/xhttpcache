@@ -104,6 +104,17 @@ batch_convert $1
     并且后台还支持对图片的预览与上传;
     根据以上特点，可以很容易的将静态网站文件全部加载到cache里,全部内存化.
 
+##感激
+感谢以下的项目,排名不分先后
+
+* [libevent](http://libevent.org/) 
+* [libevhtp](https://github.com/ellzey/libevhtp)
+* [rocksdb](http://rocksdb.org/)
+* [ssdb](http://ssdb.io/)
 
 
+##关于作者
+* [xhttpcache 主页](http://xhttpcache.0xsky.com/)
+* [xSky blog](http://www.0xsky.com/) 
+* xhttpcache QQ群: 195957781
 
