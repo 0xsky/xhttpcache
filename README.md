@@ -14,7 +14,7 @@ xhttpcache 是一个HTTP静态缓存服务，也可以做为K-V存储的NOSQL数
 * 自带WEB后台编辑器(http://127.0.0.1:9090/admin.htm)，可以直接添加(上传)/修改/删除数据;
     
 ###xhttpcache图解
-![mahua](http://xhttpcache.0xsky.com/images/plans.png)
+![xhttpcache](http://xhttpcache.0xsky.com/images/plans.png)
 
 ##使用方法：
 xhttpcache被设计为HTTP数据加速服务器:通过提供的写接口向xhttpcache写入数据，
