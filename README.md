@@ -94,7 +94,7 @@ batch_convert $1
 
 ```
     
-###特性说明：
+##特性说明：
     xhttpcache对通过HTTP访问的URI会进行类型判断，返回对应文件后缀的Content-Type，
     使得xhttpcache的HTTP接口像一个真正的WEB服务器,
     通过浏览器访问时，数据会直接以页面的形式显示。而不是像通常的数据接口一样。
