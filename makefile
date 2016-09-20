@@ -1,7 +1,7 @@
 ######################################################################
 #                         Makefile                                   #
 ######################################################################
-CC          := ccache /usr/local/bin/g++
+CC          := g++
 SRC_DIR     := ./src/xHttpd.cpp ./src/xevHtpdFrontend.cpp ./src/xevHtpdBackend.cpp ./src/xHttpCache.cpp 
 SRC_DIR     += ./src/xExpireManager.cpp ./src/xDataBase.cpp ./src/xConfig.cpp ./src/xRedisServer.cpp ./src/xEtagManager.cpp
 SRC_DIR     += ./common/jsoncpp.cpp ./common/xIniFile.cpp ./common/xLog.cpp ./common/xRedisServerLib.cpp ./common/MurmurHash2.cpp
