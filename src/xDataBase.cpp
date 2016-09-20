@@ -49,8 +49,10 @@ bool xDataBase::OpenDB(const ROCKSDB_CONFIG &cfg)
 
 void xDataBase::Close()
 {
-	delete db;
-	db = NULL;
+    if (db) {
+        delete db;
+        db = NULL;
+    }
 }
 
 void xDataBase::StatusStr(std::string &str)
@@ -85,10 +87,8 @@ bool xDataBase::EncodeKey(std::string &buf, int keytype, const std::string &key,
         buf.append(1, (uint8_t)key.size());
         buf.append(key.data(), key.size());
 
-        //log_debug("score: %s", score->c_str());
         int64_t s = str_to_int64(*score);
         s = encode_score(s);
-        //log_debug("s: %lld", s);
         buf.append((char *)&s, sizeof(int64_t));
         buf.append(1, ':');
         buf.append(filed->data(), filed->size());
@@ -99,8 +99,7 @@ bool xDataBase::EncodeKey(std::string &buf, int keytype, const std::string &key,
         return false;
     }
     }
-    //log_debug("encode_key: %s\r\n", buf.c_str());
-    //hash_dump(buf.c_str(), buf.length());
+
     return true;
 }
 
@@ -154,7 +153,6 @@ bool xDataBase::DecodeKey(const std::string &rowkey, std::string *key,
 
 int xDataBase::Set(const std::string &key, const std::string &val)
 {
-    log_debug("key:%s  val_len:%d \r\n", key.c_str(), val.length());
     string strKey;
     EncodeKey(strKey, K_STRING, key, NULL);
 
@@ -170,7 +168,6 @@ int xDataBase::Set(const std::string &key, const std::string &val)
     }
     if (bEtag) {
         xEtag->SetKey(key.c_str(), xVal.timestamp);
-        log_debug("xEtag:%p  \r\n", xEtag);
     }
 
     return db_ok;
@@ -178,7 +175,6 @@ int xDataBase::Set(const std::string &key, const std::string &val)
 
 int xDataBase::Get(const std::string &key, xValue &xval)
 {
-    //log_debug("key:%s  \r\n", key.c_str());
     string strKey;
     EncodeKey(strKey, K_STRING, key, NULL);
     Status s = db->Get(ReadOptions(), strKey, &xval.str());
@@ -200,7 +196,6 @@ int xDataBase::Get(const std::string &key, xValue &xval)
 
 int xDataBase::Del(const std::string &key)
 {
-    //log_debug("xDataBase del:%s", key.c_str());
     string strKey;
     EncodeKey(strKey, K_STRING, key, NULL);
     Status s = db->Delete(WriteOptions(), strKey);
@@ -213,7 +208,6 @@ int xDataBase::Del(const std::string &key)
 
 int xDataBase::Rawdel(const std::string &key)
 {
-    //log_debug("xDataBase del:%s", key.c_str());
     Status s = db->Delete(WriteOptions(), key);
     if (!s.ok()) {
         log_error("del error: %s", s.ToString().c_str());
@@ -235,7 +229,6 @@ int xDataBase::Expire(const std::string &key)
 
 int xDataBase::ScanKey(std::string &start, std::string &end, int limit, std::vector<std::string> &vkey)
 {
-    //log_debug("start:%s end:%s limit:%d \r\n", start.c_str(), end.c_str(), limit);
     Iterator* it = db->NewIterator(ReadOptions());
     if (!it->status().ok()) {
         log_error("scan error: %s", it->status().ToString().c_str());
@@ -251,8 +244,6 @@ int xDataBase::ScanKey(std::string &start, std::string &end, int limit, std::vec
     for (it->Seek(start_key); 
         it->Valid() && ((it->key().ToString() < end_key)&&(limit>n)); 
         it->Next()) {
-        //log_debug("%s\r\n", it->key().ToString().c_str());
-        //strkey = it->key().ToString();
         DecodeKey(it->key().ToString(), &strkey);
         vkey.push_back(strkey);
         n++;
@@ -262,7 +253,6 @@ int xDataBase::ScanKey(std::string &start, std::string &end, int limit, std::vec
 
 int xDataBase::Scan(std::string &start, std::string &end, int limit, std::vector<std::string> &vkey)
 {
-    //log_debug("start:%s end:%s limit:%d \r\n", start.c_str(), end.c_str(), limit);
     Iterator* it = db->NewIterator(ReadOptions());
     if (!it->status().ok()) {
         log_error("scan error: %s", it->status().ToString().c_str());
@@ -319,8 +309,8 @@ int xDataBase::LoadExpirationKeys(const std::string &expirekey, SortedSet &keyli
         if (DecodeKey(strkey, NULL, &member, &score) == -1){
             continue;
         }
-        log_debug("decode_zscore_key member:%s score:%s \r\n", member.c_str(), score.c_str());
-        log_debug("%s\r\n", it->key().ToString().c_str());
+        //log_debug("decode_zscore_key member:%s score:%s \r\n", member.c_str(), score.c_str());
+        //log_debug("%s\r\n", it->key().ToString().c_str());
         
         keylist.add(member, str_to_int64(score));
         n++;
@@ -328,23 +318,9 @@ int xDataBase::LoadExpirationKeys(const std::string &expirekey, SortedSet &keyli
     return db_ok;
 }
 
-void xDataBase::Debug()
-{
-    Iterator* it = db->NewIterator(ReadOptions());
-    for (it->SeekToFirst(); it->Valid(); it->Next()) {
-        log_debug("debug key:%s\r\n", it->key().ToString().c_str());
-        log_debug("debug value:%s\r\n", it->value().ToString().c_str());
-        hash_dump(it->key().ToString().c_str(), it->key().ToString().length());
-        hash_dump(it->value().ToString().c_str(), it->value().ToString().length());
-        //db->Delete(WriteOptions(), it->key().ToString());
-    }
-    assert(it->status().ok());
-    delete it;
-}
-
 int xDataBase::Flushall()
 {
-    log_debug("flushall \r\n");
+    log_warn("flushall \r\n");
     Iterator* it = db->NewIterator(ReadOptions());
     if (!it->status().ok()) {
         log_error("scan error: %s", it->status().ToString().c_str());
@@ -370,8 +346,6 @@ int xDataBase::Zset(const std::string &key, const std::string &member, const std
         return db_err;
     }
 
-    //log_debug("zset %s %s %s \r\n", key.c_str(), member.c_str(), score.c_str());
-
     std::string old_score;
     int ret = Zget(key, member, old_score);
     if (ret == db_null || old_score != score) {
@@ -380,7 +354,7 @@ int xDataBase::Zset(const std::string &key, const std::string &member, const std
         std::string enSkey;
         if (ret!=db_null) {
             // 存在老的KEY
-            log_debug("member:%s old_score: %s\r\n", member.c_str(), old_score.c_str());
+            //log_debug("member:%s old_score: %s\r\n", member.c_str(), old_score.c_str());
             EncodeKey(enSkey, K_ZSCORE, key, &member, &old_score);
             log_debug("delete enSkey: %s\r\n", enSkey.c_str());
             db->Delete(WriteOptions(), enSkey);
@@ -388,8 +362,8 @@ int xDataBase::Zset(const std::string &key, const std::string &member, const std
 
         EncodeKey(enZkey, K_ZSET, key, &member);
         EncodeKey(enSkey, K_ZSCORE, key, &member, &score);
-        log_debug("enZkey: %s\r\n", enZkey.c_str());
-        log_debug("enSkey: %s\r\n", enSkey.c_str());
+        //log_debug("enZkey: %s\r\n", enZkey.c_str());
+        //log_debug("enSkey: %s\r\n", enSkey.c_str());
         Status s = db->Put(WriteOptions(), enSkey, "");
         if (!s.ok()) {
             log_error("Put error: %s", s.ToString().c_str());

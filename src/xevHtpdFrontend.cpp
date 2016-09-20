@@ -79,7 +79,7 @@ bool xevHtpdFrontend::SetRouteTable(evhtp_t * http)
 void xevHtpdFrontend::IndexCallback(evhtp_request_t *req, void *arg)
 {
     xevHtpdFrontend *pHttpd = reinterpret_cast<xevHtpdFrontend *>(arg);
-    TIME_TEST;
+    //TIME_TEST;
     xevHtpdBase::HttpDebug(req, xConfig::GetInstance()->app.debug);
 
     GetCallbackPro(pHttpd, req, "index.html");
@@ -89,7 +89,7 @@ void xevHtpdFrontend::GetCallback(evhtp_request_t *req, void *arg)
 {
     xevHtpdFrontend *pHttpd = reinterpret_cast<xevHtpdFrontend *>(arg);
     const char *uri = (char*)req->uri->path->full+1;
-    TIME_TEST;
+    //TIME_TEST;
     xevHtpdBase::HttpDebug(req, xConfig::GetInstance()->app.debug);
 
     GetCallbackPro(pHttpd, req, uri);
@@ -107,14 +107,11 @@ void xevHtpdFrontend::GetCallbackPro(xevHtpdFrontend *pHttpd, evhtp_request_t *r
     const char* If_None_Match = evhtp_header_find(req->headers_in, "If-None-Match");
     
     if ((etag_enable)&&(NULL != If_None_Match)) {
-        //log_debug("GetCallbackPro evhtp_header If_None_Match:%s", If_None_Match);
         string str_If_None_Match;
         str_If_None_Match = If_None_Match;
         str_If_None_Match.erase(0, 1);
         str_If_None_Match.erase(str_If_None_Match.end()-1);
-        //log_debug("GetCallbackPro evhtp_header If_None_Match:%s", str_If_None_Match.c_str());
         if (pHttpd->xdb->CheckEtag(uri, str_to_int64(str_If_None_Match))) {
-            //log_debug("xEtag If_None_Match:%s", If_None_Match);
             evhtp_send_reply(req, EVHTP_RES_NOTMOD);
             return;
         }
@@ -162,10 +159,9 @@ void xevHtpdFrontend::GetCallbackPro(xevHtpdFrontend *pHttpd, evhtp_request_t *r
         int ret = gzcompress((unsigned char*)value.strValue.c_str(), value.strValue.length(), buf, &deslen);
         //log_debug("gzcompress ret:%d length:%d deslen:%d ", ret, value.strValue.length(), deslen);
         if (ret != 0) {
-            //log_error("gzcompress ret:%d", ret);
+            log_error("gzcompress ret:%d", ret);
             SendHttpResphone(req, value.strValue);
         } else {
-            //log_debug("gzcompress deslen:%d", deslen);
             AddHeader(req, "Content-Encoding", "gzip");
             SendHttpResphone(req, (const char*)buf, (int)deslen);
         }

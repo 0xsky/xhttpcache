@@ -90,7 +90,7 @@ void xhttpcache()
     version();
     xConfig::GetInstance()->Debug();
 
-    xEtagManager *etag = NULL;// 
+    xEtagManager *etag = NULL;
     xDataBase *xdb = new xDataBase;
     if (1==xConfig::GetInstance()->frontend.etag) {
         etag  = new xEtagManager;

@@ -22,8 +22,7 @@
 
 using namespace std;
 using namespace rocksdb;
-   
-//#define MAX_KEY_LEN 255
+
 
 enum ret_code {
 	db_ok = 0,
@@ -85,7 +84,6 @@ public:
     int ScanKey(std::string &start, std::string &end, int limit, std::vector<std::string> &vkey);
     int Scan(std::string &start, std::string &end, int limit, std::vector<std::string> &vkey);
     int Flushall();
-    void Debug();
 
     int Zset(const std::string &key, const std::string &member, const std::string &score);
     int Zget(const std::string &key, const std::string &member, std::string &score);

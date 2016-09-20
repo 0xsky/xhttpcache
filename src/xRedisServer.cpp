@@ -41,6 +41,7 @@ bool xRedisServer::SystemCmdRegister()
     if (!SetCmdTable("scan", (CmdCallback)&xRedisServer::ProcessCmd_scan)) return false;
     if (!SetCmdTable("flushall", (CmdCallback)&xRedisServer::ProcessCmd_flushall)) return false;
 
+
     return true;
 }
 
@@ -91,7 +92,6 @@ void xRedisServer::ProcessCmd_set(xRedisClient *pClient)
             SendNullReply(pClient);
             return ;
         }
-
     } else {
         SendErrReply(pClient, "set error ", "argc error");
         return ;
@@ -120,8 +120,6 @@ void xRedisServer::ProcessCmd_del(xRedisClient *pClient)
 
 void xRedisServer::ProcessCmd_expire(xRedisClient *pClient)
 {
-    log_debug("ProcessCmd_expire argc:%d", pClient->argc);
-
     if (3 != pClient->argc) {
         SendErrReply(pClient, "expire error", "arg error");
         return;
@@ -158,7 +156,6 @@ void xRedisServer::ProcessCmd_expire(xRedisClient *pClient)
 
 void xRedisServer::ProcessCmd_ttl(xRedisClient *pClient)
 {
-    log_debug("ProcessCmd_ttl argc:%d", pClient->argc);
     if (2 != pClient->argc) {
         SendErrReply(pClient, "ttl error", "arg error");
         return;
@@ -190,7 +187,7 @@ void xRedisServer::ProcessCmd_scan(xRedisClient *pClient)
     int limit = 0;
     int argc = pClient->argc;
 
-    log_info("processCmd_scan argc:%d", argc);
+    //log_info("processCmd_scan argc:%d", argc);
     if ((5==argc)&&(0==strcasecmp("limit", pClient->argv[argc-2]))) {
         start.assign(pClient->argv[1], sdslen(pClient->argv[1]));
         end.assign(pClient->argv[2], sdslen(pClient->argv[2]));
@@ -234,14 +231,14 @@ void xRedisServer::ProcessCmd_scan(xRedisClient *pClient)
         return;
     }
 
-    log_info("processCmd_scan size:%zu", vResult.size());
+    //log_info("processCmd_scan size:%zu", vResult.size());
     SendMultiBulkReply(pClient, vResult);
     return;
 }
 
 void xRedisServer::ProcessCmd_flushall(xRedisClient *pClient)
 {
-    log_debug("processCmd_flushall \n");
+    log_warn("processCmd_flushall \n");
     int ret = xdb->Flushall();
     if (db_ok != ret) {
         return;
@@ -250,5 +247,8 @@ void xRedisServer::ProcessCmd_flushall(xRedisClient *pClient)
     SendStatusReply(pClient, "OK");
     return;
 }
+
+
+
 
 

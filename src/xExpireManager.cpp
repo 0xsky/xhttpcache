@@ -95,12 +95,11 @@ int ExpireManager::SetTTL(const std::string &key, int64_t ttl) {
     if (!sort_set.empty() && ttl <= sort_set.max_score()){
         sort_set.add(key, ttl);
         if (sort_set.size() > BATCH_SIZE){
-            log_debug("pop_back");
             sort_set.pop_back();
         }
     } else{
         sort_set.del(key);
-        log_debug("don't put in fast_keys ttl:%lld max_score:%lld ", ttl, sort_set.max_score());
+        //log_debug(" ttl:%lld max_score:%lld ", ttl, sort_set.max_score());
     }
 
     return 0;

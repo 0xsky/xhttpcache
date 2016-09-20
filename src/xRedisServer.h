@@ -43,6 +43,7 @@ private:
     void ProcessCmd_scan(xRedisClient *pClient);
     void ProcessCmd_flushall(xRedisClient *pClient);
 
+
 private:
     xDataBase *xdb;
     ExpireManager *expiremgr;

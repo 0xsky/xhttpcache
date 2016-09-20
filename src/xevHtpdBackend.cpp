@@ -80,8 +80,9 @@ bool xevHtpdBackend::SetRouteTable(evhtp_t * http)
 
     struct timeval timeo;
     timeo.tv_sec = xConfig::GetInstance()->backend.timeout;
-    timeo.tv_usec = 0; // 0.5 sec
+    timeo.tv_usec = 0;
     evhtp_set_timeouts(http, &timeo, &timeo);
+
     if (!evhtp_set_cb(http, "/scan", xevHtpdBackend::KeyScanCallback, this))    return false;
     if (!evhtp_set_cb(http, "/statistics", xevHtpdBackend::StatisticsCallback, this)) return false;
     if (!evhtp_set_cb(http, "/config", xevHtpdBackend::ConfigCallback, this)) return false;
@@ -108,8 +109,6 @@ bool xevHtpdBackend::CheckAuth(evhtp_request_t *req)
         return false;
     }
     p += strlen("Basic ");
-
- // log_debug("xevHtpdBackend::checkauth  auth:%s pkey:%s \r\n", p, pkey);
 
     return (0==strcmp(p, (char*)pkey));
 }
@@ -140,17 +139,10 @@ void xevHtpdBackend::RESTfulPro(evhtp_request_t *req, xDataBase *xdb)
         }
 
         SendHttpResphone(req, sval.str());
-        //log_debug("RestPro type:%d key:%s value:%s\n", req->method, key.c_str(), value.c_str());
         return;
     } else if (req->method == htp_method_POST || req->method == htp_method_PUT) {
         const char* content_type = evhtp_header_find(req->headers_in, "Content-Type");
-        if (NULL!=content_type) {
-            log_debug("RESTfulPro type:%d content_type:%s\n", req->method, content_type);
-        }
         const char* content_length = evhtp_header_find(req->headers_in, "Content-Length");
-        if (NULL!=content_length) {
-            log_debug("RESTfulPro type:%d content_length:%s\n", req->method, content_length);
-        }
 
         size_t len = evbuffer_get_length(req->buffer_in);
         std::string value;
@@ -164,7 +156,7 @@ void xevHtpdBackend::RESTfulPro(evhtp_request_t *req, xDataBase *xdb)
             value = buffer;
         }
 
-        log_debug("RESTfulPro type:%d key:%s length:%d\n", req->method, key.c_str(), value.length());
+        //log_debug("RESTfulPro type:%d key:%s length:%d\n", req->method, key.c_str(), value.length());
 
         int ret = xdb->Set(key, value);
         free(buffer);
@@ -245,17 +237,14 @@ void xevHtpdBackend::StatisticsCallback(evhtp_request_t *req, void *arg)
 
     std::string strResult;
     pHttpd->xdb->StatusStr(strResult);
-    //log_debug("strResult: %s\n", strResult.c_str());
 
     AddHeader(req, "Content-Type", "text/plain");
-
     xevHtpdBackend::SendHttpResphone(req, strResult);
 }
 
 void xevHtpdBackend::ConfigCallback(evhtp_request_t *req, void *arg)
 {
     TIME_TEST;
-    //xevHtpdBackend *pHttpd = reinterpret_cast<xevHtpdBackend *>(arg);
     xevHtpdBase::HttpDebug(req, xConfig::GetInstance()->app.debug);
     log_debug("xevHtpdBackend::ConfigCallback \r\n");
 
