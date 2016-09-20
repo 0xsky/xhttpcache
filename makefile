@@ -18,7 +18,7 @@ LD_LIBS     :=  ssl crypto rt pthread dl
 AR_LIBS     :=  evhtp event event_pthreads event_openssl rocksdb  snappy bz2 z 
 STATIC_LIBS := -Wl,-Bstatic $(addprefix -l,$(AR_LIBS)) -Wl,-Bdynamic
 
-APP_NAME    := httpcache
+APP_NAME    := xhttpcache
 APP_SUFFIX  := 
 APP_TARGET  := $(APP_NAME)$(APP_SUFFIX)
 
