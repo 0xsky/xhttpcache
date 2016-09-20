@@ -40,7 +40,6 @@ bool xRedisServer::SystemCmdRegister()
     if (!SetCmdTable("ttl", (CmdCallback)&xRedisServer::ProcessCmd_ttl)) return false;
     if (!SetCmdTable("scan", (CmdCallback)&xRedisServer::ProcessCmd_scan)) return false;
     if (!SetCmdTable("flushall", (CmdCallback)&xRedisServer::ProcessCmd_flushall)) return false;
-    if (!SetCmdTable("debug", (CmdCallback)&xRedisServer::ProcessCmd_debug)) return false;
 
     return true;
 }
@@ -249,50 +248,6 @@ void xRedisServer::ProcessCmd_flushall(xRedisClient *pClient)
     }
 
     SendStatusReply(pClient, "OK");
-    return;
-}
-
-
-void xRedisServer::ProcessCmd_debug(xRedisClient *pClient)
-{
-    //std::string start;
-    //std::string end;
-    //char cEnd = 255;
-    //
-    //bool del_result = false;
-    //int limit = 0;
-    //int argc = pClient->argc;
-    //log_debug("processCmd_debug argc:%d", argc);
-    //
-    //start.assign(pClient->argv[1], sdslen(pClient->argv[1]));
-    //end.assign(pClient->argv[2], sdslen(pClient->argv[2]));
-    //limit = atoi(pClient->argv[3]);
-    //log_debug("processCmd_debug start:%s end:%s limit:%d \n", start.c_str(), end.c_str(), limit);
-
-    //std::vector<std::string> vResult;
-    //int ret = xdb->scan(start, end, limit, vResult);
-    //if (ret < 0) {
-    //    return false;
-    //}
-    //size_t ret_count = vResult.size();
-    //SendIntReply(pClient, ret_count);
-
-    xdb->Debug();
-    //const char *pOK = "+OK\r\n";
-    //senddata(pClient, pOK, strlen(pOK));
-    SendStatusReply(pClient, "OK");
-
-    //if (del_result) {
-    //    size_t ret_count = vResult.size();
-    //    for (size_t i = 0; i < ret_count; ++i) {
-    //        xdb->rawdel(vResult[i]);
-    //    }
-    //    SendIntReply(pClient, ret_count);
-    //    return true;
-    //}
-
-    //log_info("processCmd_scan size:%zu", vResult.size());
-    //SendMultiBulkReply(pClient, vResult);
     return;
 }
 

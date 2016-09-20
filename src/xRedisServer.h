@@ -42,7 +42,6 @@ private:
     
     void ProcessCmd_scan(xRedisClient *pClient);
     void ProcessCmd_flushall(xRedisClient *pClient);
-    void ProcessCmd_debug(xRedisClient *pClient);
 
 private:
     xDataBase *xdb;

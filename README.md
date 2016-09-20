@@ -5,7 +5,7 @@ xhttpcache 是一个HTTP静态缓存服务，也可以做为K-V存储的NOSQL数
 支持redis协议接口,支持HTTP协议的REST接口;
 
 ##xhttpcache有哪些功能？
-* 提供HTTP静态缓存服务，支持存储二进制数据; 
+* 提供HTTP数据缓存服务，支持存储二进制数据; 
 * 完整的K-V存储实现,  支持数据持久化存储(ROCKSDB); 
 * 支持数据超时机制，提供毫秒级精度。
 * 现实完整REDIS协议接口，支持redis的SET/GET/DEL/EXIRE/TTL命令;
