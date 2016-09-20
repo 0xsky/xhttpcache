@@ -42,9 +42,6 @@ $(APP_TARGET): $(OBJ_FILES)
 
 install:
 	@echo install...
-	@ssh tongtong@221.228.215.38 'cd /data/immserver/pushserver &&./app_push.sh stop'
-	@scp $(APP_NAME) tongtong@221.228.215.38:/data/immserver/pushserver
-	@ssh tongtong@221.228.215.38 'cd /data/immserver/pushserver &&./app_push.sh start'
 
 clean:
 	@echo clean...
