@@ -11,10 +11,26 @@ xhttpcache 是一个HTTP静态缓存服务，也可以做为K-V存储的NOSQL数
 * 现实完整REDIS协议接口，支持redis的SET/GET/DEL/EXIRE/TTL命令;
 * 实现HTTP/HTTPS协议接口，支持通过REST命令访问;
 * 实现HTTP cache相关协议，支持eTage，支持304 Not Modified, 支持对传输内容gzip压缩;
-* 自带WEB后台编辑器(http://127.0.0.1:9090/admin.htm)，可以直接添加(上传)/修改/删除数据;
+* 自带WEB后台编辑器，可以直接添加(上传)/修改/删除数据;
     
 ###xhttpcache图解
 ![xhttpcache](http://xhttpcache.0xsky.com/images/plans.png)
+
+
+###编译安装
+编译依赖库：
+需要先编译安装好:
+  ![rocksdb](https://github.com/facebook/rocksdb)
+  ![libevhtp](https://github.com/ellzey/libevhtp)
+  ![libsnappy](https://github.com/google/snappy)
+  ![libjemalloc](http://jemalloc.net/)
+  
+
+wget --no-check-certificate https://github.com/0xsky/xhttpcache/archive/master.zip
+unzip master
+cd xhttpcache-master
+make
+  
 
 ##使用方法：
 xhttpcache被设计为HTTP数据加速服务器:通过提供的写接口向xhttpcache写入的数据，
