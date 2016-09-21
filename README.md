@@ -67,7 +67,7 @@ httpd_backend_port  为后端数据操作端口，支持全部REST读写请求(g
     127.0.0.1:7379> 
 
 通过redis命令添加图片文件到 xhttpcache:
-```c
+```bash
 redis-cli -p 7379 -x set getheadimg.jpg <getheadimg.jpg
 ```
 
@@ -76,7 +76,7 @@ redis-cli -p 7379 -x set getheadimg.jpg <getheadimg.jpg
 通过以下脚本向 xhttpcache 里批量导入磁盘文件,
 以下脚本会将参数指定的目录下的文件都导入到 xhttpcache 里.
 
-```c
+```bash
 #!/bin/bash
 
 redis_cmd="redis-cli -p 7379 -x set "
@@ -99,7 +99,7 @@ batch_convert $1
 ```
 
 通过以下shell脚本，可以把 xhttpcache 里的数据按目录文件的形式导出到磁盘。
-```c
+```bash
 #!/bin/sh
 # 
 # xHttpCache数据备份脚本
