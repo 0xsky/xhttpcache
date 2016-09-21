@@ -45,8 +45,9 @@ httpd_backend_port  为后端数据操作端口，支持全部REST读写请求(g
     curl -F file=@/tmp/me.txt http://admin:admin123@127.0.0.1:9090/test.jpg
     
 ####通过redis命令使用示例：
-以下示例显示了所有的支持的REDIS命令
 
+以下示例显示了所有的支持的REDIS命令
+```bash
     [xsky@localhost xhttpcache]$ redis-cli -p 7379
     127.0.0.1:7379> set test hello 
     OK
@@ -65,6 +66,7 @@ httpd_backend_port  为后端数据操作端口，支持全部REST读写请求(g
     127.0.0.1:7379> get test
     "hello"
     127.0.0.1:7379> 
+```
 
 通过redis命令添加图片文件到 xhttpcache:
 ```bash
