@@ -153,6 +153,9 @@ Be grateful of the following items. Ranking regardless.
 
 ###About the author
 * [xhttpcache websit](http://xhttpcache.0xsky.com/)
+* xhttpcache QQGroup: 195957781
 * [xSky blog](http://www.0xsky.com/) 
-* xhttpcache QQ群: 195957781
+* Email(guozhw@gmail.com)
+* twitter: [@0xsky](http://twitter.com/0xsky)
+
 
