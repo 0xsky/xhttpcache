@@ -1,5 +1,5 @@
 
-#What is xhttpcache? 
+#What is xhttpcache? ([中文](README_中文.md))
 Xhttpcache is a HTTP static cache service, which is also NOSQL database as K-V storage supporting REDIS protocol interface as well as REST interface of HTTP protocol.
 
 #What are the functions of Xhttpcache? 
