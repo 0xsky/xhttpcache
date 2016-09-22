@@ -155,6 +155,6 @@ Be grateful of the following items. Ranking regardless.
 * [xhttpcache websit](http://xhttpcache.0xsky.com/)
 * xhttpcache QQGroup: 195957781
 * [xSky blog](http://www.0xsky.com/) 
-* [Email](guozhw@gmail.com)
+* Email: guozhw@gmail.com
 
 
