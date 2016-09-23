@@ -19,7 +19,7 @@
 #include "xConfig.h"
 #include "xevHtpdBackend.h"
 #include "Parser.h"
-#include "xTimerCount.h"
+//#include "xTimerCount.h"
 
 xevHtpdBackend::xevHtpdBackend()
 {
@@ -179,7 +179,7 @@ void xevHtpdBackend::RESTfulPro(evhtp_request_t *req, xDataBase *xdb)
 
 void xevHtpdBackend::RESTCallback(evhtp_request_t *req, void *arg)
 {
-    TIME_TEST;
+    //TIME_TEST;
     xevHtpdBackend *pHttpd = reinterpret_cast<xevHtpdBackend *>(arg);
     const char *uri = (char*)req->uri->path->full + 1;
 
@@ -207,7 +207,7 @@ void xevHtpdBackend::RESTCallback(evhtp_request_t *req, void *arg)
 
 void xevHtpdBackend::AdminShellCallback(evhtp_request_t *req, void *arg)
 {
-    TIME_TEST;
+    //TIME_TEST;
     xevHtpdBackend *pHttpd = reinterpret_cast<xevHtpdBackend *>(arg);
     xevHtpdBase::HttpDebug(req, xConfig::GetInstance()->app.debug);
     const char *uri = (char*)req->uri->path->full + 1;
@@ -226,7 +226,7 @@ void xevHtpdBackend::AdminShellCallback(evhtp_request_t *req, void *arg)
 
 void xevHtpdBackend::StatisticsCallback(evhtp_request_t *req, void *arg)
 {
-    TIME_TEST;
+    //TIME_TEST;
     xevHtpdBackend *pHttpd = reinterpret_cast<xevHtpdBackend *>(arg);
     xevHtpdBase::HttpDebug(req, xConfig::GetInstance()->app.debug);
     log_debug("xevHtpdBackend::StatisticsCallback \r\n");
@@ -244,7 +244,7 @@ void xevHtpdBackend::StatisticsCallback(evhtp_request_t *req, void *arg)
 
 void xevHtpdBackend::ConfigCallback(evhtp_request_t *req, void *arg)
 {
-    TIME_TEST;
+    //TIME_TEST;
     xevHtpdBase::HttpDebug(req, xConfig::GetInstance()->app.debug);
     log_debug("xevHtpdBackend::ConfigCallback \r\n");
 
@@ -320,7 +320,7 @@ void xevHtpdBackend::ConfigCallback(evhtp_request_t *req, void *arg)
 void xevHtpdBackend::KeyScanCallback(evhtp_request_t *req, void *arg)
 {
     xevHtpdBackend *pHttpd = reinterpret_cast<xevHtpdBackend *>(arg);
-    TIME_TEST;
+    //TIME_TEST;
     xevHtpdBase::HttpDebug(req, xConfig::GetInstance()->app.debug);
     
     int ret = 0;
