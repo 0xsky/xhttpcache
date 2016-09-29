@@ -1,3 +1,7 @@
+[![Author](https://img.shields.io/badge/author-@0xsky-blue.svg?style=flat)](http://www.0xsky.com/)
+[![Platform](https://img.shields.io/badge/platform-Linux,%20BSD,%20OS%20X,%20Windows-green.svg?style=flat)](https://github.com/0xsky/xhttpcache) 
+[![NoSQL](https://img.shields.io/badge/db-NoSQL-pink.svg?tyle=flat)](https://github.com/0xsky/xhttpcache) 
+[![License](https://img.shields.io/badge/license-GPL-yellow.svg?style=flat)](LICENSE)
 
 #What is xhttpcache? ([中文](README_中文.md))
 Xhttpcache is a HTTP static cache service, which is also NOSQL database as K-V storage supporting REDIS protocol interface as well as REST interface of HTTP protocol.
