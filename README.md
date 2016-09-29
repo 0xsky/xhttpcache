@@ -6,7 +6,7 @@
 #What is xhttpcache? ([中文说明](README_cn.md))
 Xhttpcache is a HTTP static cache service, which is also NOSQL database as K-V storage supporting REDIS protocol interface as well as REST interface of HTTP protocol.
 
-#What are the functions of Xhttpcache? 
+#What are the functions of xhttpcache? 
 
 * Provision of caching services for HTTP data and support for binary data storage; 
 * Realization of full K-V storage and permanent data storage (ROCKSDB);
@@ -16,7 +16,7 @@ Xhttpcache is a HTTP static cache service, which is also NOSQL database as K-V s
 * Implementation of HTTP cache related protocol in support of eTage ,304 Not Modified and gzip compression for transmission content;
 * Data Adjunction/ modification / deletion directly with WEB background editor 
 
-###Graphic Xhttpcache
+###Graphic xhttpcache
 ![xhttpcache](http://xhttpcache.0xsky.com/images/plans.png)
 
 ###Compilation and installation
@@ -143,7 +143,7 @@ fi
 ```
 
 ###Characteristic description:
-Xhttpcache can return the corresponding file suffix Content-Type judging the URI type visited by HTTP, which makes its HTTP interface a real WEB server. When accessed through the browser, the data will be displayed directly in the form of a page instead of the usual data interface.
+xhttpcache can return the corresponding file suffix Content-Type judging the URI type visited by HTTP, which makes its HTTP interface a real WEB server. When accessed through the browser, the data will be displayed directly in the form of a page instead of the usual data interface.
 For example: for the address with the /test.htm form. When returning contents, the HTTP head returns: text/html Content-Type, which can be displayed in the form of HTML through the browser directly to the test.htm corresponding data content, 
 For the key in the /test.jpg form, if the value content should be JPG image data, the normal display as a picture appears through the browser to access the /test.jpg. Besides, the background supports the previewing and uploading of the pictures.
 According to the above characteristics, it can be very easy to load all the static web site files to cache with full memory.
