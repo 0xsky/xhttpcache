@@ -20,10 +20,10 @@ xhttpcache 是一个HTTP静态缓存服务，也可以做为K-V存储的NOSQL数
 ###编译安装
 编译依赖库：
 需要先编译安装好:
-  ![rocksdb](https://github.com/facebook/rocksdb)
-  ![libevhtp](https://github.com/ellzey/libevhtp)
-  ![libsnappy](https://github.com/google/snappy)
-  ![libjemalloc](http://jemalloc.net/)
+  [rocksdb](https://github.com/facebook/rocksdb)
+  [libevhtp](https://github.com/ellzey/libevhtp)
+  [libsnappy](https://github.com/google/snappy)
+  [libjemalloc](http://jemalloc.net/)
   
 
 wget --no-check-certificate https://github.com/0xsky/xhttpcache/archive/master.zip
