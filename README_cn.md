@@ -32,7 +32,7 @@ cd xhttpcache-master
 make
 ``` 
 
-##使用方法：
+##使用场景：
 xhttpcache被设计为HTTP数据加速服务器:通过提供的写接口向xhttpcache写入的数据，
 可以直接通过浏览器访问.
 同时也提供了redis的协议接口，可以直接通过redis的client(支持各种语言接口)进行读写，
