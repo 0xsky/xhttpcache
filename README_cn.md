@@ -1,6 +1,6 @@
 
 ##xhttpcache是什么？
-xhttpcache 是一个HTTP静态缓存服务，也可以做为K-V存储的NOSQL数据库
+xhttpcache 是一个HTTP高速数据缓存服务，也可以做为K-V存储的NOSQL数据库
 
 支持redis协议接口,支持HTTP协议的REST接口;
 
