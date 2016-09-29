@@ -25,12 +25,12 @@ xhttpcache 是一个HTTP静态缓存服务，也可以做为K-V存储的NOSQL数
   [libsnappy](https://github.com/google/snappy)
   [libjemalloc](http://jemalloc.net/)
   
-
+```bash
 wget --no-check-certificate https://github.com/0xsky/xhttpcache/archive/master.zip
 unzip master
 cd xhttpcache-master
 make
-  
+``` 
 
 ##使用方法：
 xhttpcache被设计为HTTP数据加速服务器:通过提供的写接口向xhttpcache写入的数据，
