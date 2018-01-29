@@ -10,7 +10,7 @@
 #ifndef _XREDIS_SERVER_BASE_H_
 #define _XREDIS_SERVER_BASE_H_
 
-#include <event.h>
+
 #include <event2/event.h>
 #include <event2/bufferevent.h>
 #include <event2/buffer.h>

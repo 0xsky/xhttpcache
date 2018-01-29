@@ -10,7 +10,7 @@
 #ifndef _XEVHTTPD_BASE_H_
 #define _XEVHTTPD_BASE_H_
 
-#include <event.h>
+
 #include <stdint.h>
 #include <stdlib.h>
 #include <string>
